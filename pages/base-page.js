@@ -1,4 +1,3 @@
-const { expect } = require('@playwright/test');
 
 const phonePrefixes = ['099', '050', '066', '063', '095', '067', '096'];
 
@@ -10,7 +9,7 @@ exports.BasePage = class BasePage {
     this.page = page;
     this.go = page.locator('#dynamicLink button span svg')
     this.call = page.locator('.box button[data-bs-target="#orderModal"] span svg');
-    this.modalClose = page.locator('.modal-dialog.modal-dialog-centered div button.close_button');
+    this.modalClose = page.locator('[id="swal2-title"]');
     this.nameInput = page.locator('#modalName');
     this.phoneInput = page.locator('#modalTel');
     this.submitButton = page.locator('.modal-dialog div [type="submit"] span.align-items-center');
