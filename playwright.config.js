@@ -39,16 +39,7 @@ const config = {
     trace: 'on',
     video: 'on',
   },
-  reporter:  process.env.CI
-      ? [
-        ['html'],
-        ['playwright-qase-reporter',
-          {
-            logging: true,
-          },
-        ],
-      ]
-      : [['html']],
+  reporter: 'html',
   projects: [
     {
       name: 'chrome',
