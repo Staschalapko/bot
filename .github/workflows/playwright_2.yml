@@ -27,16 +27,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        env:
-          BASE_URL: ${{ secrets.BASE_URL }}
-          LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
-          LOGIN_PWD: ${{ secrets.LOGIN_PWD }}
-          GITHUB_RUN_ID: ${{ github.run.id }}
-          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          GMAIL_NAME: ${{ secrets.GMAIL_NAME }}
-        run: npx playwright test --project=webkit -gv 'PERF'
+        run: npx playwright test -gv 'PERF'
 
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v3
@@ -44,12 +35,4 @@ jobs:
         with:
           name: playwright-report-webkit
           path: playwright-report/
-          retention-days: 30
-
-      - name: Send Mattermost message
-        env:
-          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
-          LOGIN_ID_MATTERMOST: ${{ secrets.LOGIN_ID_MATTERMOST }}
-          PASSWORD_MATTERMOST: ${{ secrets.PASSWORD_MATTERMOST }}
-        if: always()
-        run: npx ts-node -e "require('./helpers/mattermost.helper.js').sendMessage('WKit')"
+          retention-days: 1
